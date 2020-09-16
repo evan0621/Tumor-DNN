@@ -27,7 +27,7 @@ for iter, (indata, label) in enumerate(vbar):
         FP += 1
 vbar.close()
 
-sensitivity = TP / (TP + FN)
+sensitivity = TP / TP + FN
 specificity = TN / (TN + FP)
 accuracy = (TP + TN) / (TP + TN + FP + FN)
 

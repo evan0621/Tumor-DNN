@@ -32,9 +32,9 @@ def feature_computer(p, gray_level):
 
 
 def getglcm(img, d, gl):
-    qimg = np.array(img.quantize(gl))
-    h, w = qimg.shape
-    crop_qimg = qimg[h // 5:h - h // 5, w // 5:w - w // 5]
+    crop_qimg = np.array(img.quantize(gl))
+    # h, w = qimg.shape
+    # crop_qimg = qimg[h // 5:h - h // 5, w // 5:w - w // 5]
 
     glcm0 = greycomatrix(crop_qimg, distances=[d], angles=[0], levels=gl, symmetric=True, normed=True)
     glcm45 = greycomatrix(crop_qimg, distances=[d], angles=[45], levels=gl, symmetric=True, normed=True)
@@ -75,8 +75,8 @@ def job(imglist):
                 img = Image.open(imgdir + imname)
                 img = img.convert('L')
                 cimg = np.array(img)
-                h, w = cimg.shape
-                cimg = cimg[h // 5:h - h // 5, w // 5:w - w // 5]
+                # h, w = cimg.shape
+                # cimg = cimg[h // 5:h - h // 5, w // 5:w - w // 5]
                 intensity = cimg.sum() / (cimg.shape[0] * cimg.shape[1])
 
                 asm0, con0, ent0, idm0 = getglcm(img, 2, 32)
@@ -96,9 +96,9 @@ def job(imglist):
 if __name__ == '__main__':
     global txtlist
     global miss
-    exceldir = '/home/evan/Datasets/Ultrasound_tumor/good_good_data/2018LN.xlsx'
-    imgdir = '/home/evan/Datasets/Ultrasound_tumor/good_good_data/val/'
-    txtdir = '/home/evan/Datasets/Ultrasound_tumor/good_good_data/val.txt'
+    exceldir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/2018LN.xlsx'
+    imgdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg/'
+    txtdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg.txt'
     excel = pd.read_excel(exceldir)
     imglist = os.listdir(imgdir)
     imglist = split_list(imglist, 6)

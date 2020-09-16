@@ -12,7 +12,7 @@ class Dataset(Dataset):
     def __getitem__(self, item):
         data = self.datalist[item]
         data = data.split(' ')
-        input_data = np.array(data[5:-1], dtype='float')
+        input_data = np.array(data[1:-1], dtype='float')
         intensor = torch.from_numpy(input_data)
         intensor = Variable(intensor).float().cuda()
         label = np.array(data[0], dtype='int')

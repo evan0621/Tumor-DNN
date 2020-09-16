@@ -7,7 +7,7 @@ class USDNN(nn.Module):
         super(USDNN, self).__init__()
 
         self.dnn = nn.Sequential(
-            nn.Linear(in_features=13, out_features=32),
+            nn.Linear(in_features=17, out_features=32),
             nn.BatchNorm1d(num_features=32),
             nn.LeakyReLU(),
             nn.Linear(in_features=32, out_features=64),
