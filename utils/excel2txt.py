@@ -1,4 +1,5 @@
 import os
+import time
 import math
 import threading
 import numpy as np
@@ -88,6 +89,7 @@ def job(imglist):
                                                   asm1, con1, ent1, idm1,
                                                   asm2, con2, ent2, idm2,
                                                   imgdir + imname + '\n'], dtype='str')))
+                time.sleep(0.5)
                 break
             if i == 143:
                 miss += 1
@@ -97,8 +99,8 @@ if __name__ == '__main__':
     global txtlist
     global miss
     exceldir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/2018LN.xlsx'
-    imgdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg/'
-    txtdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg.txt'
+    imgdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg_cont/'
+    txtdir = '/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg_cont.txt'
     excel = pd.read_excel(exceldir)
     imglist = os.listdir(imgdir)
     imglist = split_list(imglist, 6)

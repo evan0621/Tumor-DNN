@@ -10,8 +10,8 @@ from torch.utils.tensorboard import SummaryWriter
 epochs = 200
 batch_size = 1326
 lr = 0.001
-train_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg.txt')
-val_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg.txt')
+train_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg_deeplab.txt')
+val_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg_deeplab.txt')
 save_dir = '/home/lab70636/Projects/Tumor_DNN/model/'
 writer = SummaryWriter('/home/lab70636/Projects/Tumor_DNN/log')
 
@@ -88,8 +88,8 @@ for epoch in range(epochs):
     writer.add_scalar('specificity', specificity, epoch)
     writer.add_scalar('accuracy', accuracy, epoch)
     writer.flush()
-    time.sleep(0.03)
-    print('epoch:{}/{} tloss:{:.4f} vloss:{:.4f} sensitivity:{:.4f} specificity:{:.4f} accuracy:{:.4f}\n'.format(
+    # time.sleep(0.5)
+    print('\nepoch:{}/{} tloss:{:.4f} vloss:{:.4f} sensitivity:{:.4f} specificity:{:.4f} accuracy:{:.4f}\n'.format(
         epoch,
         epochs - 1,
         tloss,
