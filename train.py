@@ -7,19 +7,21 @@ from dataloader import Dataset
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-epochs = 200
+epochs = 100
 batch_size = 1326
-lr = 0.001
-train_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg_deeplab.txt')
-val_data = Dataset(txtdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg_deeplab.txt')
+lr = 0.0001
+train_data = Dataset(imgdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/train_seg_deeplab/',
+                     exceldir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/2018LN.xlsx')
+val_data = Dataset(imgdir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/val_seg_deeplab/',
+                   exceldir='/home/lab70636/Datasets/Ultrasound_tumor/good_good_data/2018LN.xlsx')
 save_dir = '/home/lab70636/Projects/Tumor_DNN/model/'
 writer = SummaryWriter('/home/lab70636/Projects/Tumor_DNN/log')
 
-net = USDNN()
-net1 = USDNN()
-net2 = USDNN()
-net3 = USDNN()
-net4 = USDNN()
+net = USDNN().cuda()
+net1 = USDNN().cuda()
+net2 = USDNN().cuda()
+net3 = USDNN().cuda()
+net4 = USDNN().cuda()
 netlist = [net, net1, net2, net3, net4]
 loss_func = nn.CrossEntropyLoss()
 
@@ -31,6 +33,8 @@ for epoch in range(epochs):
     for model in netlist:
         model.cuda()
     for iter, (indata, label) in enumerate(tbar):
+        indata = indata.cuda()
+        label = label.cuda()
         tlosslist = []
         for model in netlist:
             optim = torch.optim.Adam(model.parameters(), lr=lr)
@@ -56,6 +60,8 @@ for epoch in range(epochs):
     FP = 0
     FN = 0
     for iter, (indata, label) in enumerate(vbar):
+        indata = indata.cuda()
+        label = label.cuda()
         multi_pred = []
         multi_vloss = []
         for model in netlist:

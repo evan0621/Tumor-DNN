@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from tqdm import tqdm
-from skimage.feature import greycomatrix
+from skimage.feature import greycomatrix, greycoprops
 
 
 def split_list(listTemp, n):
@@ -79,6 +79,7 @@ def job(imglist):
                 # h, w = cimg.shape
                 # cimg = cimg[h // 5:h - h // 5, w // 5:w - w // 5]
                 intensity = cimg.sum() / (cimg.shape[0] * cimg.shape[1])
+                greycoprops()
 
                 asm0, con0, ent0, idm0 = getglcm(img, 2, 32)
                 asm1, con1, ent1, idm1 = getglcm(img, 1, 32)
